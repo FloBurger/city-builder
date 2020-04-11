@@ -35,6 +35,7 @@ public class TestingScript : MonoBehaviour
         {
             StoreStartPos(GetBuildVec(GetMouseWorldPosition()));
             //   Debug.Log(grid.getValue(GetMouseWorldPosition()));
+            Debug.Log(grid.getValue(GetMouseWorldPosition()));
         }
         if (Input.GetMouseButton(0))
         {
@@ -108,6 +109,7 @@ public class TestingScript : MonoBehaviour
     }
 
     /*********************************************
+    Nicht belegt == 0
     Start Node == 9
     X Node == 1
     Z Node == 2
@@ -116,15 +118,14 @@ public class TestingScript : MonoBehaviour
     private void HoverStreetOnX(Vector3 clickPoint)
     {
         Vector3 distVec = clickPoint - storeVec;
-        int tempSize = (int)cellSize;
-        //Debug.Log(clickPoint + ":" + storeVec);
-        if (grid.getValue(GetMouseWorldPosition()) == 0)
+        int tempSize = (int)cellSize;                   //größe der grid felder
+        if (grid.getValue(GetMouseWorldPosition()) == 0)    //prüfe ob das feld schon belegt ist
         {
             if (distVec.x >= 0)
             {
                 //Debug.Log(distVec + "=" + clickPoint + "-" + storeVec);
                 int dist = (int)distVec.x;
-                if (storeDist != dist || storeDist == 0)
+                if (storeDist != dist || storeDist == 0)    // wenn sich etwas verändert hat oder wenn der erste weg gezeichnet wird
                 {
                     storeDist = dist;
                     //Debug.Log(dist);
@@ -132,10 +133,10 @@ public class TestingScript : MonoBehaviour
 
                     if (dist == 0)
                     {
-                        GameObject c = GameObject.Instantiate(pathOpen);
+                        GameObject c = GameObject.Instantiate(pathOpen);        //start node zu allen seiten offen
                         //Debug.Log(finalPosition);
                         c.transform.position = finalPosition;
-                        grid.SetValue(finalPosition, 9);
+                        grid.SetValue(finalPosition, 9);            // nicht sicher od start node nötig
                         goList.Add(c);
                     }
                     else
@@ -204,7 +205,7 @@ public class TestingScript : MonoBehaviour
 
         if (distVec.x >= 0)
         {
-            Debug.Log(distVec.x + tempSize + ";" + goList.Count * tempSize);
+            //Debug.Log(distVec.x + tempSize + ";" + goList.Count * tempSize);
             if (distVec.x + tempSize < goList.Count * tempSize)
             {
                 grid.SetValue(goList[goList.Count - 1].transform.position, 0);
@@ -356,13 +357,13 @@ public class TestingScript : MonoBehaviour
         {
             closeToX = false;
         }
-        Debug.Log(closeToX);
+        //Debug.Log(closeToX);
     }
 
     private void StoreStartPos(Vector3 clickPoint)
     {
         storeVec = clickPoint;
-        Debug.Log("start" + clickPoint);
+        //Debug.Log("start" + clickPoint);
     }
 
     private Vector3[] getSurrPos()

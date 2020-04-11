@@ -392,7 +392,7 @@ MonoBehaviour:
     type: 3}
   gridX: 20
   gridZ: 20
-  cellSize: 1
+  cellSize: 2
   originVec: {x: -5, y: 0, z: -5}
 --- !u!65 &1209427656
 BoxCollider:
